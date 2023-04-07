@@ -25,16 +25,16 @@ scene.add(circle);
 
 document.addEventListener('keydown', (event) => {
     if(event.key == 'ArrowLeft'){
-        inputX -= 0.2 * acceleration;
+        inputX = -maxVel;
     }
     if(event.key == 'ArrowRight'){
-        inputX += 0.2 * acceleration;
+        inputX = maxVel;
     }
     if(event.key == 'ArrowUp'){
-        inputY += 0.2 * acceleration;
+        inputY = maxVel;
     }
     if(event.key == 'ArrowDown'){
-        inputY -= 0.2 * acceleration;
+        inputY = -maxVel;
     }
     if(inputX > maxVel){
         inputX = maxVel;
