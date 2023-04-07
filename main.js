@@ -1,5 +1,13 @@
 import * as THREE from 'three';
 
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:3000');
+
+socket.on('connect', () => {
+    console.log('Conectado al servidor');
+  });
+
 let inputX = 0;
 let inputY = 0;
 const maxVel = 0.7;
