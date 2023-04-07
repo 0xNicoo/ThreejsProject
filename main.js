@@ -10,6 +10,8 @@ socket.on('connect', () => {
 
 let inputX = 0;
 let inputY = 0;
+let movOnX = 0;
+let movOnY = 0;
 const maxVel = 0.7;
 const acceleration = 1.2;
 
@@ -29,7 +31,11 @@ const circle = new THREE.Mesh(geometry, material);
 
 scene.add(circle);
 
-
+socket.on('outputs', (data) => {
+    movOnX = data.message.x;
+    movOnY = data.message.y
+    console.log(data)
+});
 
 document.addEventListener('keydown', (event) => {
     if(event.key == 'ArrowLeft'){
@@ -56,8 +62,7 @@ document.addEventListener('keydown', (event) => {
     if(inputY < -maxVel){
         inputY = -maxVel;
     }
-    console.log(inputX)
-    console.log(inputY)
+    socket.emit('inputs', {message: {x: inputX, y: inputY}})
 });
 
 document.addEventListener('keyup', (event) => {
@@ -76,8 +81,10 @@ document.addEventListener('keyup', (event) => {
 function animate() {
     requestAnimationFrame(animate);
 
-    circle.position.x += inputX;
-    circle.position.y += inputY;
+    circle.position.x += movOnX;
+    circle.position.y += movOnY;
+
+    //console.log('POSITION: ', circle.position)
 
     renderer.render(scene, camera);
 }
