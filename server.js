@@ -9,7 +9,10 @@ const io = require('socket.io')(http, {
     }
 });
 
+
 app.use(cors());
+
+app.use(express.static('dist'));
 
 io.on('connection', (socket) => {
     console.log('Usuario conectado');
@@ -22,6 +25,10 @@ io.on('connection', (socket) => {
         io.emit('outputs', data)
     })
 });
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/dist/index.html')
+})
 
 http.listen(3000, () => {
     console.log('Servidor escuchando en el puerto 3000');

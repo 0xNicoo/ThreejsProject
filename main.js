@@ -84,8 +84,6 @@ function animate() {
     circle.position.x += movOnX;
     circle.position.y += movOnY;
 
-    //console.log('POSITION: ', circle.position)
-
     renderer.render(scene, camera);
 }
 
