@@ -37,18 +37,36 @@ socket.on('outputs', (data) => {
 
 document.addEventListener('keydown', (event) => {
     if(event.key == 'ArrowLeft'){
-        socket.emit('arrowleft')
+        socket.emit('arrowleftDown')
     }
     if(event.key == 'ArrowRight'){
-        socket.emit('arrowright')
+        socket.emit('arrowrightDown')
     }
     if(event.key == 'ArrowUp'){
-       socket.emit('arrowup')
+       socket.emit('arrowupDown')
     }
     if(event.key == 'ArrowDown'){
-        socket.emit('arrowdown')
+        socket.emit('arrowdownDown')
     }
 });
+
+
+document.addEventListener('keyup', (event) => {
+    if(event.key == 'ArrowLeft'){
+        socket.emit('arrowleftUp')
+    }
+    if(event.key == 'ArrowRight'){
+        socket.emit('arrowrightUp')
+    }
+    if(event.key == 'ArrowUp'){
+       socket.emit('arrowupUp')
+    }
+    if(event.key == 'ArrowDown'){
+        socket.emit('arrowdownUp')
+    }
+});
+
+
 
 
 function animate() {
@@ -58,8 +76,6 @@ function animate() {
     circle.position.y += movOnY;
 
     renderer.render(scene, camera);
-    movOnX = 0;
-    movOnY = 0;
 }
 
 

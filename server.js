@@ -11,7 +11,7 @@ const io = require('socket.io')(http, {
 
 let inputX = 0;
 let inputY = 0;
-const maxVel = 4;
+const maxVel = 1;
 
 app.use(cors());
 
@@ -24,29 +24,54 @@ io.on('connection', (socket) => {
         console.log('Usuario desconectado');
     });
 
-    socket.on('arrowleft', () => {
+    socket.on('arrowleftDown', () => {
         inputX = -maxVel;
         io.emit('outputs', {inputX, inputY})
         resetInputs();
     })
 
-    socket.on('arrowright', () => {
+    socket.on('arrowrightDown', () => {
         inputX = maxVel;
         io.emit('outputs', {inputX, inputY})
         resetInputs();
     })
 
-    socket.on('arrowup', () => {
+    socket.on('arrowupDown', () => {
         inputY = +maxVel;
         io.emit('outputs', {inputX, inputY})
         resetInputs();
     })
 
-    socket.on('arrowdown', () => {
+    socket.on('arrowdownDown', () => {
         inputY = -maxVel;
         io.emit('outputs', {inputX, inputY})
         resetInputs();
     })
+
+    socket.on('arrowleftUp', () => {
+        inputX = 0;
+        io.emit('outputs', {inputX, inputY})
+        resetInputs();
+    })
+
+    socket.on('arrowrightUp', () => {
+        inputX = 0;
+        io.emit('outputs', {inputX, inputY})
+        resetInputs();
+    })
+
+    socket.on('arrowupUp', () => {
+        inputY = 0;
+        io.emit('outputs', {inputX, inputY})
+        resetInputs();
+    })
+
+    socket.on('arrowdownUp', () => {
+        inputY = 0;
+        io.emit('outputs', {inputX, inputY})
+        resetInputs();
+    })
+    
 });
 
 app.get('/', (req, res) => {
